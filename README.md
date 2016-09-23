@@ -1,14 +1,31 @@
-# IBM UrbanCode Deploy Plug-in Template
+# IBM UrbanCode Deploy Resource Utilities Plug-in
 ---
+Note: This is not the plugin distributable! This is the source code. To find the installable plugin, go into the 'release' tab, and download a stable version.
 
-The UrbanCode Deploy Plug-in Template project is a sample project that can be forked and used as a base for community plug-ins.
+This UrbanCode Deploy plug-in suppliments the existing UrbanCode Deploy respources plugin with additional steps to help manage large resource trees and the properties on resources in large trees.
 
-Create your own plug-in by following our [beginner](https://developer.ibm.com/urbancode/docs/urbancode-plug-development-tutorial/) and [upgrade](https://developer.ibm.com/urbancode/docs/community-plug-development-upgrade-tutorial/) tutorials. For more documentation on plug-in development, see the [IBM UrbanCode Build help](http://www-01.ibm.com/support/knowledgecenter/SS8NMD_6.1.2/com.ibm.ucbuild.doc/topics/c_node_extend.html) or the [IBM UrbanCode Deploy help](http://www.ibm.com/support/knowledgecenter/SS4GSP_6.2.1/com.ibm.udeploy.doc/topics/c_node_extending.html).
+### The Resource Utilities plug-in includes the following steps:
 
-### Compiling Source
-`gradle`
+List resources
+Find resources with properties that have missing values
+Search and report property values
 
-The helloworld plug-in .zip file can be found in build/distributions after you build the project.
+### Compatibility
+	This plug-in requires version 6.0 or later of IBM UrbanCode Deploy.
+
+### Installation
+	The packaged zip is located in the dist folder. No special steps are required for installation.
+	See Installing plug-ins in UrbanCode Deploy. Download this zip file if you wish to skip the
+	manual build step. Otherwise, download the entire uDeploy-Resource-Utilities-Plugin and
+	run the "gradle" command in the top level folder. This should compile the code and create
+	a new distributable zip within the dist folder. Use this command if you wish to make
+	your own changes to the plugin.
 
 ### License
-This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
+    This plug-in is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
+
+### History
+	Version 2
+		GitHub Release.
+	Version 1
+		Initial Release.
