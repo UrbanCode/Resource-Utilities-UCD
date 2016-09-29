@@ -16,7 +16,7 @@ This plug-in is protected under the [Eclipse Public 1.0 License](http://www.ecli
 	This plug-in requires version 6.0.1.0 or later of IBM UrbanCode Deploy.
 
 ### Installation
-	The packaged zip is hosted on the [Resource Utilities plug-in  page](https://developer.ibm.com/urbancode/plugin/resource-utilities/) on the IBM UrbanCode website.
+	The packaged zip is hosted on the Resource Utilities plug-in page on the IBM UrbanCode website.
     No special steps are required for installation. See Installing plug-ins in IBM UrbanCode Deploy.
     Download this zip file if you wish to skip the manual build step. Otherwise, download the entire
     Resource-Utilities-UCD repository and follow the "Build" direction below.
