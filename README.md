@@ -1,8 +1,8 @@
 # IBM UrbanCode Deploy Resource Utilities Plug-in
 ---
-Note: This is not the plugin distributable! This is the source code. To find the installable plug-in, please head over to the [Resource Utilities plug-in page](https://developer.ibm.com/urbancode/plugin/resource-utilities/) on the IBM UrbanCode website.
+Note: This is not the plug-in distributable! This is the source code. To find the installable plug-in, please head over to the [Resource Utilities plug-in page](https://developer.ibm.com/urbancode/plugin/resource-utilities/) on the IBM UrbanCode website.
 
-This IBM UrbanCode Deploy Resource Utilities plug-in supplements the existing UrbanCode Deploy Resources plug-in with additional steps to help manage large resource trees and the properties on resources in large trees.
+This IBM UrbanCode Deploy Resource Utilities plug-in supplements the existing IBM UrbanCode Deploy Resources plug-in with additional steps to help manage large resource trees and the properties on resources in large trees.
 
 ### License
 This plug-in is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
