@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - © Copyright IBM Corporation 2016.
+ - This is licensed under the following license.
+ - The Eclipse Public 1.0 License (http://www.eclipse.org/legal/epl-v10.html)
+ - U.S. Government Users Restricted Rights:  Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
 <plugin-upgrade
         xmlns="http://www.urbancode.com/UpgradeXMLSchema_v1"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <migrate to-version="2">
-    <migrate-command name="Hello World">
-      <migrate-properties>
-        <!-- Adding a new property always requires the 'default' attribute -->
-        <migrate-property name="name" default="World"/>
-      </migrate-properties>
-    </migrate-command>
+  <migrate to-version="1">
   </migrate>
 </plugin-upgrade>

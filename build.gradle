@@ -41,56 +41,64 @@ configurations {
 }
 
 repositories {
-      mavenCentral()
-      flatDir {
-          dirs 'libs'
-      }
+    mavenCentral()
+    flatDir {
+      dirs 'libs'
+    }
 }
 
 dependencies {
 
-  compile group: 'commons-collections', name: 'commons-collections', version: '3.2.1'
-  compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
-  compile group: 'org.codehaus.jettison', name: 'jettison', version: '1.1'
-  compile group: 'com.google.code.gson', name: 'gson', version: '2.2.4'
-  compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
-  compile group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
-  compile 'com.ibm.urbancode.plugins:groovy-plugin-utils:1.0'
+    compile group: 'com.ibm.urbancode.plugins', name: 'groovy-plugin-utils', version: '1.0'
+    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7'
+    compile group: 'org.codehaus.jettison', name: 'jettison', version: '1.1'
 
-  compile 'org.codehaus.groovy:groovy-all:2.3.6'
+    compile localGroovy()
+    println '[Local Compile] Compiling libs/uDeployRestClient.jar and libs/HttpComponents-Util.jar...'
+    println '[Possible Solution] If ":compileGroovy" failure, please view the Resource-Utilities-UCD GitHub project for help.'
+    compile files ("libs/uDeployRestClient.jar", "libs/HttpComponents-Util.jar")
+    // testCompile group: 'junit', name: 'junit', version: '4.11'
+}
 
-	compile files ("libs/uDeployRestClient.jar", "libs/HttpComponents-Util.jar")
+task listJars << {
+    configurations.compile.each { File file -> println file.name }
+}
 
-	// testCompile group: 'junit', name: 'junit', version: '4.11'
-	}
-
-  task listJars << {
-      configurations.compile.each { File file -> println file.name }
-  }
-
-
-  sourceSets {
-      main {
-          groovy {
-              srcDirs = ['src/main/groovy', 'src/main/zip']
-          }
+sourceSets {
+  main {
+      groovy {
+          srcDirs = ['src/main/groovy', 'src/main/zip', 'src/main/util']
       }
   }
+}
 
-  task copyDeps(type: Copy) {
-      from configurations.runtime
-      into 'lib'
-  }
+task copyDeps(type: Copy) {
+    from configurations.runtime
+    into 'lib'
+}
 
-  task distPlugin(type: Zip, dependsOn: 'compileGroovy') {
-      def releaseVersion = apiVersion + "." + pluginVersion
-      from(sourceSets.main.groovy.srcDirs) {
-          filter(ReplaceTokens, tokens: [API_VERSION: apiVersion, RELEASE_VERSION: releaseVersion])
-      }
-      into('lib') {
-          from configurations.runtime
-      }
-      archiveName = "${pluginName}-${releaseVersion}.zip"
-  }
+task distPlugin(type: Zip, dependsOn: ['compileGroovy', 'gatherI18n']) {
+    def releaseVersion = apiVersion + "." + pluginVersion
+    from(sourceSets.main.groovy.srcDirs) {
+      filter(ReplaceTokens, tokens: [API_VERSION: apiVersion, RELEASE_VERSION: releaseVersion])
+      exclude 'i18n-scraper.groovy'
+    }
+    into('lib') {
+      from copyDeps
+    }
+    into('locale') {
+      from buildLocaleDir
+    }
+  archiveName = "${pluginName}-${releaseVersion}.zip"
+}
 
-  task cleanAll(dependsOn: ['clean', 'cleanCopyDeps', 'cleanDistPlugin'])
+task gatherI18n(type: JavaExec) {
+    delete buildLocaleDir
+    mkdir buildLocaleDir
+
+    main = 'i18n-scraper'
+    args 'build/locale/en.properties'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task cleanAll(dependsOn: ['clean', 'cleanCopyDeps', 'cleanDistPlugin', 'cleanGatherI18n'])
